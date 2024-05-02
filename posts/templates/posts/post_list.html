@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %} 
+<h1>お知らせ</h1>
+{% if post_list %}
+    <ul>
+    {% for post in post_list %}
+        <li>{{ post.title }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>お知らせはありません。</p>
+{% endif %}
+{% endblock %}
