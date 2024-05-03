@@ -11,3 +11,7 @@ class IndexView(generic.ListView):
                 .filter(is_public=True)
                 .order_by('-published_at')[:10]
         )
+
+class DetailView(generic.DetailView):
+    def get_queryset(self):
+        return Post.objects.filter(is_public=True)
