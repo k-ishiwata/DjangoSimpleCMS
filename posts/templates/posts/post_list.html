@@ -1,42 +1,26 @@
 {% extends 'base.html' %}
 
 {% block main %} 
-    <h1>お知らせ</h1>
+    <h1>{{ title }}</h1>
+
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'posts:index_category' category.id %}">{{ category.title }}</a></li>
+        {% endfor %}
+    </ul>
+
     {% if post_list %}
         <ul>
             {% for post in post_list %}
-                <li><a href="{% url 'posts:detail' post.id %}">{{ post.title }}</a></li>
+                <li>
+                    <a href="{% url 'posts:detail' post.id %}">{{ post.title }}</a>
+                    {{ post.category }}
+                </li>
             {% endfor %}
         </ul>
 
-        {% if is_paginated %}
-            {% if page_obj.has_previous %}
-                <a href="?page=1">
-                    &laquo;
-                </a>
-                <a href="?page={{ page_obj.previous_page_number }}">
-                    &lsaquo;
-                </a>
-            {% endif %}
-
-            {% for number in page_obj.paginator.page_range %}
-                {% if page_obj.number == number %}
-                    {{ number }}
-                {% else %}
-                    <a href="?page={{ number }}">{{ number }}</a>
-                {% endif %}
-            {% endfor %}
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">
-                    &rsaquo;
-                </a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">
-                    &raquo;
-                </a>
-            {% endif %}
-        {% endif %}
+        {% include 'pager.html' %}
     {% else %}
-        <p>お知らせはありません。</p>
+        <p>{{ title }}はありません。</p>
     {% endif %}
 {% endblock %}
