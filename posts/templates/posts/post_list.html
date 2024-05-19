@@ -9,12 +9,19 @@
         {% endfor %}
     </ul>
 
+    <ul>
+        {% for tag in tags %}
+            <li><a href="{% url 'posts:index_tag' tag.id %}">{{ tag.title }}</a></li>
+        {% endfor %}
+    </ul>
+
     {% if post_list %}
         <ul>
             {% for post in post_list %}
                 <li>
                     <a href="{% url 'posts:detail' post.id %}">{{ post.title }}</a>
                     {{ post.category }}
+                    {{ post.tag_list }}
                 </li>
             {% endfor %}
         </ul>

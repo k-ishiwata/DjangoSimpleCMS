@@ -7,4 +7,10 @@
 <div>{{ post.body }}</div>
 <div>{{ post.category }}</div>
 
+<ul>
+    {% for tag in post.tags.all %}
+        <li>{{ tag }}</li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
